@@ -1,6 +1,5 @@
 = form_with model: patient do |form|
   -if patient.errors.any?
-    %ul
       - patient.errors.full_messages.each do |message|
         %li= message
   %div
