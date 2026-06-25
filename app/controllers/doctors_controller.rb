@@ -1,5 +1,4 @@
 class DoctorsController < ApplicationController
-  layout "doctor"
   before_action :set_doctor, only: %i[show edit update destroy ]
   def index
     @doctors = Doctor.all
@@ -40,7 +39,8 @@ class DoctorsController < ApplicationController
 
   private
   def doctor_params
-    params.require(:doctor).permit(:name)
+    debugger
+    params.require(:doctor).permit(:name, :specialization, :hospital_id)
   end
 
   def set_doctor

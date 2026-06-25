@@ -1,0 +1,20 @@
+%div{style: "display:flex; justify-content:center;"}
+  %div
+    %h1{style:"color: navy;"} Doctor Profiles
+    - if notice
+      %p{color: "red"}=notice
+    = link_to "New Profile", new_profile_path
+    %table{border:"1"}
+      %thead
+        %tr
+          %th Experience
+          %th Consultation fee
+          %th{colspan: "3"} Actions
+      %tbody
+        - @profiles.each do |profile|
+          %tr
+            %td= profile.experience
+            %td= profile.consultation_fee
+            %td= link_to "Show"
+            %td= link_to "Edit"
+            %td= link_to "Delete"

@@ -1,0 +1,19 @@
+%div{style: "display:flex; justify-content:center;"}
+  %div
+    %h1{style:"color: navy;"} Appointments
+    - if notice
+      %p{color: "red"}=notice
+
+    = link_to "New appointment", new_appointment_path
+
+    %table{border: "1"}
+      %thead
+        %tr
+          %th Reason
+      %tbody
+        - @appointments.each do |appointment|
+          %tr
+            %td= appointment.reason
+            %td= link_to "Show"
+            %td= link_to "Edit"
+            %td= link_to "Delete"

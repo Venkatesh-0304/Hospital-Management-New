@@ -6,6 +6,18 @@
   %div
     = form.label :name
     = form.text_field :name
+  
+  %div 
+    = form.checkbox :specialization
+    = form.label :specialization, "Cardio"
+    = form.checkbox :specialization
+    = form.label :specialization, "Orto"
+    = form.checkbox :specialization
+    = form.label :specialization, "Psychology"
+
+  %div 
+    =form.label :hospital_id, "Hospital"
+    =form.collection_select :hospital_id,Hospital.all,:id,:name,prompt: "Select Hospital"
 
   %div
     = form.submit

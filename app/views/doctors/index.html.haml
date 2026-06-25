@@ -1,11 +1,10 @@
-
 %div{style: "display:flex; justify-content:center;"}
   %div
+    %h1{style:"color: navy;"} Doctors
     - if notice
       %p{style: "color: red;"}
       = notice
 
-    %h1 Doctors
     = link_to "New Doctor", new_doctor_path
 
     %table{border:"1"}
