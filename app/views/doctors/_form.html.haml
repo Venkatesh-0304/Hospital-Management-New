@@ -1,0 +1,12 @@
+
+= form_with model: doctor do |form|
+  - if doctor.errors.any?
+    %ul
+      - doctor.errors.full_messages.each do |message|
+        %li= message
+  %div
+    = form.label :name
+    = form.text_field :name
+
+  %div
+    = form.submit
