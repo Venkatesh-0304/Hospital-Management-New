@@ -1,0 +1,22 @@
+-if notice
+  %p{style:"color: red;"}
+    =notice
+
+= link_to "New patient", new_patient_path
+
+%table{border: "1"}
+  %thead
+    %tr
+      %th Name
+      %th Age
+      %th Gender
+      %th{colspan: "3"} Actions
+  %tbody
+    - @patients.each do |patient|
+      %tr
+        %td= patient.name
+        %td= patient.age
+        %td= patient.gender
+        %td= link_to "Show", patient_path(patient)
+        %td= link_to "Edit", edit_patient_path(patient)
+        %td= link_to "Delete", patient_path(patient), data: {turbo_method: :delete, turbo_confirm: "Are you sure"}

@@ -1,0 +1,21 @@
+= form_with model: patient do |form|
+  -if patient.errors.any?
+    %ul
+      - patient.errors.full_messages.each do |message|
+        %li= message
+  %div
+    =form.label :name
+    =form.text_field :name
+  
+  %div
+    = form.label :age
+    = form.text_field :age
+  
+  %div
+    =form.radio_button :gender, "male"
+    =form.label :gender_male, "Male"
+    =form.radio_button :gender, "female"
+    =form.label :gender_female, "Female"
+
+  %div
+    =form.submit 
