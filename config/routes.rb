@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   # root "posts#index"
   resources :doctors
   resources :patients
+  resources :hospitals
 end
