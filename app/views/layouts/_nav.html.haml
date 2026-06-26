@@ -1,11 +1,10 @@
-%nav{style: "display: flex; justify-content: space-evenly; background-color: lightblue;"}
+%nav{style: "display: flex; justify-content: space-between; background-color: lightblue;"}
   %div 
     %h1 Hospital Management
-  %div 
-    %ul
-      %li= link_to "Hospitals", hospitals_path
-      %li= link_to "Doctors", doctors_path
-      %li= link_to "Patients", patients_path
-      %li= link_to "Appointments", appointments_path
-      %li= link_to "Doctor Profiles", profiles_path
+  %ul{style: "display: flex; list-style: none; gap:20px; margin: 0; padding: 0; align-items: center"}
+    %li= link_to "Hospitals", hospitals_path
+    %li= link_to "Doctors", doctors_path
+    %li= link_to "Patients", patients_path
+    %li= link_to "Appointments", appointments_path
+    %li= link_to "Doctor Profiles", profiles_path
       
