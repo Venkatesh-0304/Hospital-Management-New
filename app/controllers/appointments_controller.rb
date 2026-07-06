@@ -1,5 +1,5 @@
 class AppointmentsController < ApplicationController
-  before_action :set_appointment, only: %i[show edit destroy]
+  before_action :set_appointment, only: %i[show edit destroy update]
   def index
     @appointments = Appointment.all
   end
@@ -20,7 +20,7 @@ class AppointmentsController < ApplicationController
     if @appointment.save
       redirect_to appointments_path, notice: "Appointment added successfully"
     else
-      render :new, status: :unprocessabel_entity
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -28,7 +28,7 @@ class AppointmentsController < ApplicationController
     if @appointment.update(params_appointment)
       redirect_to appointments_path, notice: "Updated successfully"
     else
-      render :edit, status: :unprocessabel_entity
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -40,7 +40,8 @@ class AppointmentsController < ApplicationController
   private
 
   def params_appointment
-    params.require(:appointment).permit(:reason)
+    debugger
+    params.require(:appointment).permit(:reason, :doctor_id, :patient_id, :appointment_date)
   end
 
   def set_appointment

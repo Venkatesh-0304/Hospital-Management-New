@@ -40,7 +40,6 @@ class PatientsController < ApplicationController
   private
 
   def params_patient
-    debugger
     params.require(:patient).permit(:name, :age, :gender, :born_on)
   end
 

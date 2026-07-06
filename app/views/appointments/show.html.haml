@@ -1,0 +1,13 @@
+%h1 Appointment Details
+%p
+  %strong Reason :
+  = @appointment.reason
+%p
+  %strong Doctor :
+  = @appointment.doctor.name
+%p
+  %strong Patinet :
+  = @appointment.patient.name
+%p
+  %strong Appointment Date :
+  = @appointment.appointment_date

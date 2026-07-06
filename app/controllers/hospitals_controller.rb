@@ -1,5 +1,5 @@
 class HospitalsController < ApplicationController
-  before_action :set_hospital, only: %i[show edit destroy]
+  before_action :set_hospital, only: %i[show edit destroy update]
   def index
     @hospitals = Hospital.all
   end
@@ -18,7 +18,7 @@ class HospitalsController < ApplicationController
     @hospital = Hospital.new(params_hospital)
 
     if @hospital.save
-      redirect_to hospitals_path, notice: "Hospital #{@hospital.name} added successfully"
+      redirect_to hospitals_path, notice: "#{@hospital.name} added successfully"
     else
       render :new, status: :unprocessable_entity
     end
@@ -26,7 +26,7 @@ class HospitalsController < ApplicationController
 
   def update
     if @hospital.update(params_hospital)
-      redirect_to hospitals_path, notice: "Hospital #{@hospital.name} added successfully"
+      redirect_to hospitals_path, notice: "#{@hospital.name} updated successfully"
     else
       render :edit, status: :unprocessable_entity
     end

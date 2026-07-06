@@ -28,7 +28,7 @@ class DoctorsController < ApplicationController
     if @doctor.update(doctor_params)
       redirect_to doctors_path, notice: "Doctor #{@doctor.name} updated successfully"
     else
-      render :edit, status: :unprocessabel_entity
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -39,7 +39,6 @@ class DoctorsController < ApplicationController
 
   private
   def doctor_params
-    debugger
     params.require(:doctor).permit(:name, :specialization, :hospital_id)
   end
 
