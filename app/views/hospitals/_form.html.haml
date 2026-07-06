@@ -1,11 +1,3 @@
-= form_with model: hospital do |form|
-  - if hospital.errors.any?
-    %ul
-      - hospital.errors.full_messages.each do |message|
-        %li= message
-  %div
-    = form.label :name
-    = form.text_field :name
-  
-  %div
-    =form.submit
+= simple_form_for hospital do |form|
+    = form.input :name
+    = form.submit

@@ -7,14 +7,16 @@
     %table{border:"1"}
       %thead
         %tr
+          %th Doctor
           %th Experience
           %th Consultation fee
           %th{colspan: "3"} Actions
       %tbody
         - @profiles.each do |profile|
           %tr
+            %td= profile.doctor.name
             %td= profile.experience
             %td= profile.consultation_fee
-            %td= link_to "Show"
-            %td= link_to "Edit"
-            %td= link_to "Delete"
+            %td= link_to "Show", profile_path(profile)
+            %td= link_to "Edit", edit_profile_path(profile)
+            %td= link_to "Delete", profile_path(profile), data: {turbo_method: :delete, turbo_confirm: "Are you show?"}
