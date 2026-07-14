@@ -1,5 +1,5 @@
 class HospitalsController < ApplicationController
-  before_action :set_hospital, only: %i[show edit destroy update]
+  before_action :set_hospital, only: %i[show edit destroy update doctors]
   def index
     @hospitals = Hospital.all
   end
@@ -8,6 +8,8 @@ class HospitalsController < ApplicationController
     @hospital = Hospital.new
   end
 
+  def doctors
+  end
 
   def show
     @last_hospital = Hospital.find_by(id: cookies[:last_viewed_hospital_id])

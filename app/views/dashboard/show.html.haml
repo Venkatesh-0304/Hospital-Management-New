@@ -1,0 +1,9 @@
+%h3 Dashboard
+
+%div
+  = link_to "Hospitals", dashboard_tab_path(tab: "hospitals"), data: {turbo_frame: "dashboard_content"}
+  = link_to "Doctors", dashboard_tab_path(tab: "doctors"), data: {turbo_frame: "dashboard_content}
+  = link_to "Patients", dashboard_tab_path(tab: "patients"), data: {turbo_frame: "dashboard_content}
+
+= turbo_frame_tag "dashboard_content" do 
+  = render "dashboard/#{@tab}"
