@@ -1,7 +1,7 @@
 %nav{style: "display: flex; justify-content: space-between; background-color: lightblue;"}
   %div 
     %h1 Hospital Management
-  %ul{style: "display: flex; list-style: none; gap:20px; margin: 0; padding: 0; align-items: center"}
+  %ul{id: "tabs", style: "display: flex; list-style: none; gap:20px; margin: 0; padding: 0; align-items: center"}
     %li= link_to "Hospitals", hospitals_path
     %li= link_to "Doctors", doctors_path
     %li= link_to "Patients", patients_path

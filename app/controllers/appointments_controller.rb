@@ -1,13 +1,29 @@
 class AppointmentsController < ApplicationController
-  before_action :set_appointment, only: %i[show edit destroy update]
+  before_action :set_appointment, only: %i[show edit destroy update cancel]
   def index
     @appointments = Appointment.all
+  end
+
+  def cancel
+    @appointment.update(status: "Cancelled")
+    redirect_to appointments_path notice: "Appointment Cancelled"
+  end
+
+  def upcoming
+    @appointments = Appointment.where("Scheduled_at > ?", Time.current)
+    render json: @appointments
   end
 
   def edit
   end
 
   def show
+    @appointment = Appointment.find(params[:id])
+
+    respond_to do |format|
+      format.html # renders app/views/appointments/show.html.erb
+      format.json { render json: @appointment }
+    end
   end
 
   def new
@@ -18,7 +34,8 @@ class AppointmentsController < ApplicationController
     @appointment = Appointment.new(params_appointment)
 
     if @appointment.save
-      redirect_to appointments_path, notice: "Appointment added successfully"
+      flash[:notice] = "Appointment added successfully"
+      redirect_to appointments_path
     else
       render :new, status: :unprocessable_entity
     end
@@ -40,8 +57,7 @@ class AppointmentsController < ApplicationController
   private
 
   def params_appointment
-    debugger
-    params.require(:appointment).permit(:reason, :doctor_id, :patient_id, :appointment_date)
+    params.require(:appointment).permit(:notes, :doctor_id, :patient_id, :scheduled_at)
   end
 
   def set_appointment

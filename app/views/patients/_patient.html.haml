@@ -1,0 +1,8 @@
+%tr{id: dom_id(patient)}
+  %td= patient.name
+  %td= patient.age
+  %td= patient.gender
+  %td= patient.born_on
+  %td= link_to "Show", patient_path(patient)
+  %td= link_to "Edit", edit_patient_path(patient)
+  %td= link_to "Delete", patient_path(patient), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"}

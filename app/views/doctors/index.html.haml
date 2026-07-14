@@ -1,22 +1,23 @@
-%div{style: "display:flex; justify-content:center;"}
-  %div
-    %h1{style:"color: navy;"} Doctors
-    - if notice
-      %p{style: "color: red;"}
-      = notice
+= turbo_frame_tag "tab_content" do
+  %div{style: "display:flex; justify-content:center;"}
+    %div
+      %h1{style:"color: navy;"} Doctors
+      - if notice
+        %p{style: "color: red;"}
+        = notice
 
-    = link_to "New Doctor", new_doctor_path
+      = link_to "New Doctor", new_doctor_path
 
-    %table{border:"1"}
-      %thead
-        %tr
-          %th name
-          %th{colspan: "3"} Actions
-      %tbody
-        - @doctors.each do |doctor|
+      %table{border:"1"}
+        %thead
           %tr
-            %td= doctor.name
-            %td= link_to "Show", doctor_path(doctor)
-            %td= link_to "Edit", edit_doctor_path(doctor)
-            %td= link_to "Delete", doctor_path(doctor), data: {turbo_method: :delete,turbo_confirm: "Are you sure?"}
+            %th name
+            %th{colspan: "3"} Actions
+        %tbody
+          - @doctors.each do |doctor|
+            %tr
+              %td= doctor.name
+              %td= link_to "Show", doctor_path(doctor)
+              %td= link_to "Edit", edit_doctor_path(doctor)
+              %td= link_to "Delete", doctor_path(doctor), data: {turbo_method: :delete,turbo_confirm: "Are you sure?"}
 

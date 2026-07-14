@@ -1,30 +1,15 @@
-%div{style: "display:flex; justify-content:center;"}
-  %div
-    %h1{style:"color:navy;"} Patients
-    -if notice
-      %p{style:"color: red;"}
-        =notice
+%h1 Patients
 
-    = link_to "New patient", new_patient_path
-  
+= render "form", patient: Patient.new
 
-    %table{border: "1"}
-      %thead
-        %tr
-          %th Name
-          %th Age
-          %th Gender
-          %th Born On
-          %th{colspan: "3"} Actions
-      %tbody
-        - @patients.each do |patient|
-          %tr
-            %td= patient.name
-            %td= patient.age
-            %td= patient.gender
-            %td= patient.born_on
-            %td= link_to "Show", patient_path(patient)
-            %td= link_to "Edit", edit_patient_path(patient)
-            %td= link_to "Delete", patient_path(patient), data: {turbo_method: :delete, turbo_confirm: "Are you sure"}
-      
-    = render PatientsStatisticsComponent.new(patients: @patients)
+%table{border: "1"}
+  %thead
+    %tr
+      %th Name
+      %th Age
+      %th Gender
+      %th Born On
+      %th{colspan: "3"} Actions
+
+  %tbody#patients
+    = render @patients

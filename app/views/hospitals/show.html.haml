@@ -1,4 +1,6 @@
-%h1 Hospital Details
-%p
-  %strong Hospital Name: 
-  = @hospital.name
+= turbo_frame_tag "tab_content" do
+  %h1 Hospital Details
+  - if @last_hospital
+    %p{style: "color: gray;"} You last looked at: #{@last_hospital.name}
+  
+  %h1= @hospital.name
