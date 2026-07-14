@@ -1,6 +1,7 @@
 = simple_form_for appointment do |f|
   = f.association :doctor
   = f.association :patient
-  = f.input :reason
-  = f.input :appointment_date
+  = f.input :notes
+  = f.input :scheduled_at
+  = f.input :status
   = f.button :submit

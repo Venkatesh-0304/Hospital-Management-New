@@ -1,0 +1,21 @@
+%div{style: "display:flex; justify-content:center;"}
+  %div
+    %h1{style:"color:navy;"} Hospitals
+    - if notice
+      %p{color: "red"}
+        =notice
+
+    = link_to "New hospital", new_hospital_path
+
+    %table{border: "1"}
+      %thead
+        %tr
+          %th Name
+          %th{colspan: "3"} Actions
+      %tbody
+        - @hospitals.each do |hospital|
+          %tr    
+            %td= hospital.name
+            %td= link_to "Show", hospital_path(hospital)
+            %td= link_to "Edit", edit_hospital_path(hospital)
+            %td= link_to "Delete", hospital_path(hospital), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}

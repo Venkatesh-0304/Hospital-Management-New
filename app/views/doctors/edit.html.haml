@@ -1,2 +1,3 @@
-= render "form", doctor: @doctor
-= link_to "Back", doctors_path
+= turbo_frame_tag "tab_content" do
+  = render "form", doctor: @doctor
+  = link_to "Back", doctors_path

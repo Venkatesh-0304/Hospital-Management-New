@@ -10,16 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_26_070205) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_07_105636) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
   create_table "appointments", force: :cascade do |t|
-    t.date "appointment_date"
     t.datetime "created_at", null: false
     t.bigint "doctor_id", null: false
+    t.text "notes"
     t.bigint "patient_id", null: false
-    t.text "reason"
+    t.datetime "scheduled_at"
+    t.string "status", default: "pending", null: false
     t.datetime "updated_at", null: false
     t.index ["doctor_id"], name: "index_appointments_on_doctor_id"
     t.index ["patient_id"], name: "index_appointments_on_patient_id"
@@ -54,6 +55,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_26_070205) do
     t.datetime "created_at", null: false
     t.bigint "doctor_id", null: false
     t.integer "experience"
+    t.string "languages_spoken", default: [], array: true
     t.datetime "updated_at", null: false
     t.index ["doctor_id"], name: "index_profiles_on_doctor_id"
   end

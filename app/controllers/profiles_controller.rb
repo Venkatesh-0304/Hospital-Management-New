@@ -40,7 +40,7 @@ class ProfilesController < ApplicationController
   private
 
   def params_profile
-    params.require(:profile).permit(:doctor_id, :experience, :consultation_fee)
+    params.require(:profile).permit(:doctor_id, :experience, :consultation_fee, languages_spoken: [])
   end
 
   def set_profile

@@ -1,13 +1,16 @@
 %h1 Appointment Details
 %p
-  %strong Reason :
-  = @appointment.reason
+  %strong Notes :
+  = @appointment.notes
 %p
   %strong Doctor :
   = @appointment.doctor.name
 %p
-  %strong Patinet :
+  %strong Patient :
   = @appointment.patient.name
 %p
-  %strong Appointment Date :
-  = @appointment.appointment_date
+  %strong Scheduled At :
+  = @appointment.scheduled_at
+%p
+  %strong Status :
+  = @appointment.status

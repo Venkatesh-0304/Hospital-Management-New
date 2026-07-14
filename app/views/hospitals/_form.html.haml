@@ -1,3 +1,4 @@
-= simple_form_for hospital do |form|
-    = form.input :name
-    = form.submit
+= turbo_frame_tag "tab_content" do
+    = simple_form_for hospital do |form|
+        = form.input :name
+        = form.submit

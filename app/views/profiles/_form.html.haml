@@ -2,4 +2,7 @@
   = f.association :doctor
   = f.input :experience
   = f.input :consultation_fee
+  = f.input :languages_spoken,
+            as: :check_boxes,
+            collection: ["English", "Hindi", "Kannada", "Tamil", "Telugu", "Spanish"]
   = f.button :submit

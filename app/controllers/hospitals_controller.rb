@@ -8,7 +8,10 @@ class HospitalsController < ApplicationController
     @hospital = Hospital.new
   end
 
+
   def show
+    @last_hospital = Hospital.find_by(id: cookies[:last_viewed_hospital_id])
+    cookies.permanent[:last_viewed_hospital_id] = @hospital.id
   end
 
   def edit

@@ -1,2 +1,3 @@
-%h1 New Hospital 
-= render "form", hospital: @hospital
+= turbo_frame_tag "tab_content" do
+  %h1 New Hospital 
+  = render "form", hospital: @hospital
