@@ -22,10 +22,20 @@ class HospitalsController < ApplicationController
   def create
     @hospital = Hospital.new(params_hospital)
 
-    if @hospital.save
-      redirect_to hospitals_path, notice: "#{@hospital.name} added successfully"
-    else
-      render :new, status: :unprocessable_entity
+    respond_to do |format|
+      if @hospital.save
+        format.turbo_stream
+        format.html { redirect_to hospitals_path, notice: "#{@hospital.name} successfully created" }
+      else
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(
+            dom_id(@hospital, :form),
+            partial: "form",
+            locals: { hospital: @hospital }
+          ), status: :unprocessable_entity
+        end
+        format.html { render :new, status: :unprocessable_entity }
+      end
     end
   end
 

@@ -1,4 +1,8 @@
-= turbo_frame_tag "tab_content" do
-    = simple_form_for hospital do |form|
-        = form.input :name
-        = form.submit
+%div{id: dom_id(hospital, hospital.persisted? ? :name : :form)}
+  = simple_form_for hospital do |form|
+    - if hospital.errors.any?
+      %ul
+        - hospital.errors.full_messages.each do |msg|
+          %li= msg
+    = form.input :name
+    = form.submit

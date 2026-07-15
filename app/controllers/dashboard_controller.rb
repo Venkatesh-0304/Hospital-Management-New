@@ -1,8 +1,8 @@
 class DashboardController < ApplicationController
-  TABS = %w[hospitals doctors patients].freez
+  TABS = %w[hospitals doctors patients].freeze
 
   def show
-    @tab = TABS.include?(param[:tab]) ? param[:tab] : "hospitals"
+    @tab = TABS.include?(params[:tab]) ? params[:tab] : "hospitals"
 
     case  @tab
     when "hospitals" then @hospitals = Hospital.all
