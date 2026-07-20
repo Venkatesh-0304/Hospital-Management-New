@@ -7,10 +7,7 @@
 = turbo_stream.update "modal", ""
 
 = turbo_stream.update "hospital_count" do
-  =Hospital.count
-
-= turbo_stream.update "doctors_count" do
-  =Doctor.count
+  = @hospitals_count
 
 = turbo_stream.update "notification" do
   %p{style: "color: green"}= flash.now[:notice]

@@ -23,6 +23,7 @@ class HospitalsController < ApplicationController
     @hospital = Hospital.new(params_hospital)
     respond_to do |format|
       if @hospital.save
+        @hospitals_count = Hospital.count
         format.turbo_stream
       else
         render :new, status: :unprocessable_entity
