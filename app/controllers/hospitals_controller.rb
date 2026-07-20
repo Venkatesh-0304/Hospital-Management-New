@@ -60,10 +60,13 @@ class HospitalsController < ApplicationController
   end
 
   def destroy
-    @hospital.destroy
-    respond_to do |format|
-      format.turbo_stream
-      flash.now[:notice] = "#{@hospital.name} deleted successfully"
+    if @hospital.destroy
+      @hospitals_count = Hospital.count
+      respond_to do |format|
+        format.turbo_stream
+      end
+    else
+      redirect_to hospitals_path, notice: "Hospital not found"
     end
   end
 
