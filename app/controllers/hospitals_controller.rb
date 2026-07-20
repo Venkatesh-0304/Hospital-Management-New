@@ -21,21 +21,11 @@ class HospitalsController < ApplicationController
 
   def create
     @hospital = Hospital.new(params_hospital)
-
     respond_to do |format|
       if @hospital.save
-        flash.now[:notice] = "Hospital #{@hospital.name} created successfully"
         format.turbo_stream
-        format.html { redirect_to hospitals_path, notice: "#{@hospital.name} successfully created" }
       else
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.replace(
-            dom_id(@hospital, :form),
-            partial: "form",
-            locals: { hospital: @hospital }
-          ), status: :unprocessable_entity
-        end
-        format.html { render :new, status: :unprocessable_entity }
+        render :new, status: :unprocessable_entity
       end
     end
   end
@@ -43,18 +33,9 @@ class HospitalsController < ApplicationController
   def update
     respond_to do |format|
       if @hospital.update(params_hospital)
-        flash.now[:notice] = "#{@hospital.name} updated successfully"
         format.turbo_stream
-        format.html { redirect_to hospitals_path, notice: "Hospital updated successfully" }
       else
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.update(
-            dom_id(@hospital, :name),
-            partial: "form",
-            locals: { hospital: @hospital }
-          ), status: :unprocessable_entity
-        end
-        format.html { render :edit, status: :unprocessable_entity }
+        render :edit, status: :unprocessable_entity
       end
     end
   end
