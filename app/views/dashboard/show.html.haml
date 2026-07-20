@@ -1,9 +1,16 @@
-%h3 Dashboard
+%h1 Dashboard
 
-%div
-  = link_to "Hospitals", dashboard_tab_path(tab: "hospitals"), data: {turbo_frame: "dashboard_content"}
-  = link_to "Doctors", dashboard_tab_path(tab: "doctors"), data: {turbo_frame: "dashboard_content"}
-  = link_to "Patients", dashboard_tab_path(tab: "patients"), data: {turbo_frame: "dashboard_content"}
+%nav
+  = link_to 'Hospitals', dashboard_tab_path('hospitals'),
+      data: { turbo_frame: 'tab_content', turbo_action: 'advance' }
 
-= turbo_frame_tag "dashboard_content" do 
+  = link_to 'Doctors', dashboard_tab_path('doctors'),
+      data: { turbo_frame: 'tab_content', turbo_action: 'advance' }
+
+  = link_to 'Patients', dashboard_tab_path('patients'),
+      data: { turbo_frame: 'tab_content', turbo_action: 'advance' }
+
+%hr
+
+= turbo_frame_tag 'tab_content' do
   = render "dashboard/#{@tab}"

@@ -1,4 +1,4 @@
 class Hospital < ApplicationRecord
-  has_many :doctors
+  has_many :doctors, dependent: :destroy
   validates :name, presence: true
 end

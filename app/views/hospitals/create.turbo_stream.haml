@@ -1,7 +1,16 @@
-= turbo_stream.append "hospitals_table_body" do
-  %tr    
-    %th= link_to @hospital.name, doctors_hospital_path(@hospital), data: { turbo_frame: dom_id(@hospital, :doctors) }
-  %tr
-    %td= turbo_frame_tag dom_id(@hospital, :doctors)
+= turbo_stream.prepend "hospitals_table_body" do
+  = render "hospital_row", hospital: @hospital
+
+= turbo_stream.replace "hospital_form" do
+  %p Hospital created successfully
 
 = turbo_stream.update "modal", ""
+
+= turbo_stream.update "hospital_count" do
+  =Hospital.count
+
+= turbo_stream.update "doctors_count" do
+  =Doctor.count
+
+= turbo_stream.update "notification" do
+  %p{style: "color: green"}= flash.now[:notice]

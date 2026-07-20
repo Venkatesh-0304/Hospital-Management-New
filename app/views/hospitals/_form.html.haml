@@ -1,8 +1,4 @@
-%div{id: dom_id(hospital, hospital.persisted? ? :name : :form)}
+%div#hospital_form
   = simple_form_for hospital do |form|
-    - if hospital.errors.any?
-      %ul
-        - hospital.errors.full_messages.each do |msg|
-          %li= msg
     = form.input :name
     = form.submit

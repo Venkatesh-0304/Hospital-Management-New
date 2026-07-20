@@ -24,6 +24,7 @@ class HospitalsController < ApplicationController
 
     respond_to do |format|
       if @hospital.save
+        flash.now[:notice] = "Hospital #{@hospital.name} created successfully"
         format.turbo_stream
         format.html { redirect_to hospitals_path, notice: "#{@hospital.name} successfully created" }
       else
@@ -40,17 +41,30 @@ class HospitalsController < ApplicationController
   end
 
   def update
-    if @hospital.update(params_hospital)
-      redirect_to hospitals_path, notice: "#{@hospital.name} updated successfully"
-    else
-      render :edit, status: :unprocessable_entity
+    respond_to do |format|
+      if @hospital.update(params_hospital)
+        flash.now[:notice] = "#{@hospital.name} updated successfully"
+        format.turbo_stream
+        format.html { redirect_to hospitals_path, notice: "Hospital updated successfully" }
+      else
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.update(
+            dom_id(@hospital, :name),
+            partial: "form",
+            locals: { hospital: @hospital }
+          ), status: :unprocessable_entity
+        end
+        format.html { render :edit, status: :unprocessable_entity }
+      end
     end
   end
 
   def destroy
     @hospital.destroy
-
-    redirect_to hospitals_path, notice: "Hospital #{@hospital.name} deleted successfully"
+    respond_to do |format|
+      format.turbo_stream
+      flash.now[:notice] = "#{@hospital.name} deleted successfully"
+    end
   end
 
   private

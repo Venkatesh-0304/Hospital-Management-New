@@ -1,0 +1,3 @@
+= turbo_stream.remove dom_id(@hospital)
+= turbo_stream.update "notification" do
+  %p{style: "color: red"}= flash.now[:notice]
