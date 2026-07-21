@@ -1,0 +1,5 @@
+%tr{id: dom_id(doctor)}
+  %td
+    = turbo_frame_tag dom_id(doctor) do
+      = doctor.name
+  %td= link_to "Delete", doctor_path(doctor), data: {turbo_method: :delete, turbo_confirm: "Are you sure"}
