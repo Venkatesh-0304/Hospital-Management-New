@@ -3,6 +3,7 @@
     %div
       %h1{style:"color:navy;"} Hospitals
       = render "notification"
+      = turbo_frame_tag "modal"
 
       = link_to "New hospital", new_hospital_path, data: {turbo_frame: "modal"}
 
