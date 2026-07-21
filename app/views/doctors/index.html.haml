@@ -2,7 +2,8 @@
   %div{style: "display:flex; justify-content:center;"}
     %div
       %h1{style:"color: navy;"} Doctors
-      = link_to "New Doctor", new_doctor_path
+      = turbo_frame_tag "modal"
+      = link_to "New Doctor", new_doctor_path, data: {turbo_frame: "modal"}
 
       %table{border:"1"}
         %thead
