@@ -1,0 +1,5 @@
+= turbo_stream.replace dom_id(@hospital) do
+  = render "hospital_row", hospital: @hospital
+
+= turbo_stream.update "notification" do
+  %p{style: "color:green"}= "#{@hospital.name} updated successfully"

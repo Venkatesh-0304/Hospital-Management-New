@@ -1,5 +1,5 @@
 class HospitalsController < ApplicationController
-  before_action :set_hospital, only: %i[show edit destroy update]
+  before_action :set_hospital, only: %i[show edit destroy update doctors]
   def index
     @hospitals = Hospital.all
   end
@@ -8,6 +8,8 @@ class HospitalsController < ApplicationController
     @hospital = Hospital.new
   end
 
+  def doctors
+  end
 
   def show
     @last_hospital = Hospital.find_by(id: cookies[:last_viewed_hospital_id])
@@ -19,26 +21,35 @@ class HospitalsController < ApplicationController
 
   def create
     @hospital = Hospital.new(params_hospital)
-
-    if @hospital.save
-      redirect_to hospitals_path, notice: "#{@hospital.name} added successfully"
-    else
-      render :new, status: :unprocessable_entity
+    respond_to do |format|
+      if @hospital.save
+        @hospitals_count = Hospital.count
+        format.turbo_stream
+      else
+        render :new, status: :unprocessable_entity
+      end
     end
   end
 
   def update
-    if @hospital.update(params_hospital)
-      redirect_to hospitals_path, notice: "#{@hospital.name} updated successfully"
-    else
-      render :edit, status: :unprocessable_entity
+    respond_to do |format|
+      if @hospital.update(params_hospital)
+        format.turbo_stream
+      else
+        render :edit, status: :unprocessable_entity
+      end
     end
   end
 
   def destroy
-    @hospital.destroy
-
-    redirect_to hospitals_path, notice: "Hospital #{@hospital.name} deleted successfully"
+    if @hospital.destroy
+      @hospitals_count = Hospital.count
+      respond_to do |format|
+        format.turbo_stream
+      end
+    else
+      redirect_to hospitals_path, notice: "Hospital not found"
+    end
   end
 
   private

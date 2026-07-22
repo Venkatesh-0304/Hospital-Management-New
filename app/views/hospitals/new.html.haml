@@ -1,3 +1,5 @@
-= turbo_frame_tag "tab_content" do
-  %h1 New Hospital 
-  = render "form", hospital: @hospital
+= turbo_frame_tag "modal" do
+  %div{style: "position:fixed; inset:0; background:rgba(0,0,0,0.4); display:flex; align-items:center; justify-content:center;"}
+    %div{style: "background:white; padding:24px; border-radius:8px; min-width:320px;"}
+      %h1 New Hospital 
+      = render "form", hospital: @hospital, data: {turbo_frame: "tab_content"}
