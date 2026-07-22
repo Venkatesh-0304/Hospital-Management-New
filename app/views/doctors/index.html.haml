@@ -2,22 +2,14 @@
   %div{style: "display:flex; justify-content:center;"}
     %div
       %h1{style:"color: navy;"} Doctors
-      - if notice
-        %p{style: "color: red;"}
-        = notice
-
-      = link_to "New Doctor", new_doctor_path
+      = turbo_frame_tag "modal"
+      = link_to "New Doctor", new_doctor_path, data: {turbo_frame: "modal"}
 
       %table{border:"1"}
         %thead
           %tr
             %th name
             %th{colspan: "3"} Actions
-        %tbody
+        %tbody#doctors_table_body
           - @doctors.each do |doctor|
-            %tr
-              %td= doctor.name
-              %td= link_to "Show", doctor_path(doctor)
-              %td= link_to "Edit", edit_doctor_path(doctor)
-              %td= link_to "Delete", doctor_path(doctor), data: {turbo_method: :delete,turbo_confirm: "Are you sure?"}
-
+            = render "doctor_row", doctor: doctor

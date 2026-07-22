@@ -51,18 +51,22 @@ class DoctorsController < ApplicationController
     @doctor = Doctor.new(doctor_params)
 
     # render plain: "Doctor Created"
-    if @doctor.save
-      redirect_to @doctor
-    else
-      render :new
+    respond_to do |format|
+      if @doctor.save
+        format.turbo_stream
+      else
+        render :new, status: :unprocessable_entity
+      end
     end
   end
 
   def update
-    if @doctor.update(doctor_params)
-      redirect_to doctors_path, notice: "Doctor #{@doctor.name} updated successfully"
-    else
-      render :edit, status: :unprocessable_entity
+    respond_to do |format|
+      if @doctor.update(doctor_params)
+        format.turbo_stream
+      else
+        render :edit, status: :unprocessable_entity
+      end
     end
   end
 

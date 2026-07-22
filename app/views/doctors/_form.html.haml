@@ -1,32 +1,31 @@
-= turbo_frame_tag "tab_content" do
-  = form_with model: doctor do |form|
-    - if doctor.errors.any?
-      %ul
-        - doctor.errors.full_messages.each do |message|
-          %li= message
-    %div
-      = form.label :name
-      = form.text_field :name
-    
-    %div 
-      = form.checkbox :specialization
-      = form.label :specialization, "Cardio"
-      = form.checkbox :specialization
-      = form.label :specialization, "Orto"
-      = form.checkbox :specialization
-      = form.label :specialization, "Psychology"
+= form_with model: doctor do |form|
+  - if doctor.errors.any?
+    %ul
+      - doctor.errors.full_messages.each do |message|
+        %li= message
+  %div
+    = form.label :name
+    = form.text_field :name
   
-    %div 
-      =form.label :hospital_id, "Hospital"
-      =form.collection_select :hospital_id,Hospital.all,:id,:name,prompt: "Select Hospital"
-  
-    %div
-      = form.fields_for :profile do |profile|
-        = profile.label :experience
-        = profile.number_field :experience
-  
-        = profile.label :consultation_fee
-        = profile.number_field :consultation_fee
-  
-    %div
-      = form.submit 
+  %div 
+    = form.checkbox :specialization
+    = form.label :specialization, "Cardio"
+    = form.checkbox :specialization
+    = form.label :specialization, "Orto"
+    = form.checkbox :specialization
+    = form.label :specialization, "Psychology"
+
+  %div 
+    =form.label :hospital_id, "Hospital"
+    =form.collection_select :hospital_id,Hospital.all,:id,:name,prompt: "Select Hospital"
+
+  %div
+    = form.fields_for :profile do |profile|
+      = profile.label :experience
+      = profile.number_field :experience
+
+      = profile.label :consultation_fee
+      = profile.number_field :consultation_fee
+
+  %div
+    = form.submit 
