@@ -1,0 +1,4 @@
+%h3 Hospitals
+%ul 
+  - @hospitals.each do |hospital|
+    %li= link_to hospital.name, hospital_path(hospital)

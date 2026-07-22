@@ -9,6 +9,12 @@ Rails.application.routes.draw do
   draw :doctors
   draw :patients
 
-  resources :hospitals
+  resources :hospitals do
+    member do
+      get :doctors
+    end
+  end
   resources :profiles
+  get "dashboard", to: "dashboard#show", defaults: { tab: "hospitals" }, as: :dashboard
+  get "dashboard/:tab", to: "dashboard#show", as: :dashboard_tab, constraints: { tab: /hospitals|doctors|patients/ }
 end

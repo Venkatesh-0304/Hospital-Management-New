@@ -1,0 +1,13 @@
+= turbo_stream.prepend "hospitals_table_body" do
+  = render "hospital_row", hospital: @hospital
+
+= turbo_stream.replace "hospital_form" do
+  %p Hospital created successfully
+
+= turbo_stream.update "modal", ""
+
+= turbo_stream.update "hospital_count" do
+  = @hospitals_count
+
+= turbo_stream.update "notification" do
+  %p{style: "color: green"}= flash.now[:notice]
