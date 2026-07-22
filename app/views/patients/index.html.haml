@@ -1,15 +1,16 @@
-%h1 Patients
+= turbo_frame_tag "tab" do
+  %h1 Patients
 
-= render "form", patient: Patient.new
+  = render "form", patient: Patient.new
 
-%table{border: "1"}
-  %thead
-    %tr
-      %th Name
-      %th Age
-      %th Gender
-      %th Born On
-      %th{colspan: "3"} Actions
+  %table{border: "1"}
+    %thead
+      %tr
+        %th Name
+        %th Age
+        %th Gender
+        %th Born On
+        %th{colspan: "3"} Actions
 
-  %tbody#patients
-    = render @patients
+    %tbody#patients
+      = render @patients
