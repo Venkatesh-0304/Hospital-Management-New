@@ -4,8 +4,9 @@
       %h1{style: "color: navy;"} Appointments
       - if flash[:notice]
         %p{style: "color: red;"}= flash[:notice]
-
-      = link_to "New appointment", new_appointment_path
+      
+      = turbo_frame_tag "modal"
+      = link_to "New appointment", new_appointment_path, data:{turbo_frame: "modal"}
 
       %table{border: "1"}
         %thead
@@ -16,15 +17,6 @@
             %th Doctor
             %th Patient
             %th{colspan: "4"} Actions
-        %tbody
+        %tbody#appointments_table_body
           - @appointments.each do |appointment|
-            %tr
-              %td= appointment.notes
-              %td= appointment.scheduled_at
-              %td= appointment.status
-              %td= appointment.doctor.name
-              %td= appointment.patient.name
-              %td= link_to "Show", appointment_path(appointment)
-              %td= link_to "Edit", edit_appointment_path(appointment)
-              %td= link_to "Delete", appointment_path(appointment), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-              %td= link_to "Cancel", cancel_appointment_path(appointment), data: { turbo_method: :patch, turbo_confirm: "Cancel this appointment?" }
+            = render "appointment_row", appointment: appointment
