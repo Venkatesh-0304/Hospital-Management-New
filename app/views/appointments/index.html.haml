@@ -1,29 +1,30 @@
-%div{style: "display:flex; justify-content:center;"}
-  %div
-    %h1{style: "color: navy;"} Appointments
-    - if flash[:notice]
-      %p{style: "color: red;"}= flash[:notice]
+= turbo_frame_tag "tab" do
+  %div{style: "display:flex; justify-content:center;"}
+    %div
+      %h1{style: "color: navy;"} Appointments
+      - if flash[:notice]
+        %p{style: "color: red;"}= flash[:notice]
 
-    = link_to "New appointment", new_appointment_path
+      = link_to "New appointment", new_appointment_path
 
-    %table{border: "1"}
-      %thead
-        %tr
-          %th Notes
-          %th Scheduled At
-          %th Status
-          %th Doctor
-          %th Patient
-          %th{colspan: "4"} Actions
-      %tbody
-        - @appointments.each do |appointment|
+      %table{border: "1"}
+        %thead
           %tr
-            %td= appointment.notes
-            %td= appointment.scheduled_at
-            %td= appointment.status
-            %td= appointment.doctor.name
-            %td= appointment.patient.name
-            %td= link_to "Show", appointment_path(appointment)
-            %td= link_to "Edit", edit_appointment_path(appointment)
-            %td= link_to "Delete", appointment_path(appointment), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-            %td= link_to "Cancel", cancel_appointment_path(appointment), data: { turbo_method: :patch, turbo_confirm: "Cancel this appointment?" }
+            %th Notes
+            %th Scheduled At
+            %th Status
+            %th Doctor
+            %th Patient
+            %th{colspan: "4"} Actions
+        %tbody
+          - @appointments.each do |appointment|
+            %tr
+              %td= appointment.notes
+              %td= appointment.scheduled_at
+              %td= appointment.status
+              %td= appointment.doctor.name
+              %td= appointment.patient.name
+              %td= link_to "Show", appointment_path(appointment)
+              %td= link_to "Edit", edit_appointment_path(appointment)
+              %td= link_to "Delete", appointment_path(appointment), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+              %td= link_to "Cancel", cancel_appointment_path(appointment), data: { turbo_method: :patch, turbo_confirm: "Cancel this appointment?" }

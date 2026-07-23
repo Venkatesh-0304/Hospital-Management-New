@@ -2,6 +2,7 @@
   %div 
     %h1 Hospital Management
   %ul{id: "tabs", style: "display: flex; list-style: none; gap:20px; margin: 0; padding: 0; align-items: center"}
+    %li= rand(1..1000)
     %li
       Hospital Count
       %span{id: "hospital_count"} 
@@ -10,9 +11,9 @@
       Doctors Count
       %span{id: "doctors_count"} 
         =Doctor.count
-    %li= link_to "Hospitals", hospitals_path
-    %li= link_to "Doctors", doctors_path
-    %li= link_to "Patients", patients_path
-    %li= link_to "Appointments", appointments_path
-    %li= link_to "Doctor Profiles", profiles_path
+    %li= link_to "Hospitals", hospitals_path, data: {turbo_frame: "tab", turbo_action: "advance"} 
+    %li= link_to "Doctors", doctors_path, data: {turbo_frame: "tab", turbo_action: "advance"}
+    %li= link_to "Patients", patients_path, data: {turbo_frame: "tab", turbo_action: "advance"}
+    %li= link_to "Appointments", appointments_path, data: {turbo_frame: "tab", turbo_action: "advance"}
+    %li= link_to "Doctor Profiles", profiles_path, data: {turbo_frame: "tab", turbo_action: "advance"}
       
