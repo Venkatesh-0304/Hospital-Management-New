@@ -34,8 +34,7 @@ class AppointmentsController < ApplicationController
     @appointment = Appointment.new(params_appointment)
 
     if @appointment.save
-      flash[:notice] = "Appointment added successfully"
-      redirect_to appointments_path
+      # flash[:notice] = "Appointment added successfully"
     else
       render :new, status: :unprocessable_entity
     end
@@ -43,7 +42,9 @@ class AppointmentsController < ApplicationController
 
   def update
     if @appointment.update(params_appointment)
-      redirect_to appointments_path, notice: "Updated successfully"
+      respond_to do |format|
+        format.turbo_stream
+      end
     else
       render :edit, status: :unprocessable_entity
     end

@@ -3,8 +3,13 @@ Rails.application.routes.draw do
   root "hospitals#index"
   get "/home", to: redirect("/")
 
+  resources :appointments do
+    member do
+      patch :cancel
+    end
+  end
 
-  draw :api
+  # draw :api
   draw :admin
   draw :doctors
   draw :patients
