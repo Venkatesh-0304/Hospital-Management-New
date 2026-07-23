@@ -1,7 +1,7 @@
 = turbo_frame_tag "tab" do
   %h1 Patients
-
-  = render "form", patient: Patient.new
+  = turbo_frame_tag "modal"
+  = link_to "New patient", new_patient_path, data: {turbo_frame: "modal"}
 
   %table{border: "1"}
     %thead
