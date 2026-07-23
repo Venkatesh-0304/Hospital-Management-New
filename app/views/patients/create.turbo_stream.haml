@@ -1,2 +1,3 @@
-= turbo_stream.append "patients" do
+= turbo_stream.prepend "patients" do
   = render @patient
+  = turbo_stream.update "modal", ""
