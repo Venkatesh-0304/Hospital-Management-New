@@ -32,9 +32,10 @@ class HospitalsController < ApplicationController
   end
 
   def update
+    @hospital_was = @hospital.dup
     respond_to do |format|
       if @hospital.update(params_hospital)
-        HospitalMailer.details_updated(@hospital).deliver_now
+        HospitalMailer.details_updated(@hospital_was, @hospital).deliver_now
         format.turbo_stream
       else
         render :edit, status: :unprocessable_entity
