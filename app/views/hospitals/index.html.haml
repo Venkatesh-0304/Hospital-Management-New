@@ -15,3 +15,4 @@
         %tbody#hospitals_table_body
           - @hospitals.each do |hospital|
             = render "hospital_row", hospital: hospital
+      = paginate @hospitals
