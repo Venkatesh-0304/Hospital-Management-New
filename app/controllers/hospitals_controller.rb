@@ -32,8 +32,10 @@ class HospitalsController < ApplicationController
   end
 
   def update
+    @hospital_was = @hospital.dup
     respond_to do |format|
       if @hospital.update(params_hospital)
+        HospitalMailer.details_updated(@hospital_was, @hospital).deliver_now
         format.turbo_stream
       else
         render :edit, status: :unprocessable_entity
@@ -55,7 +57,7 @@ class HospitalsController < ApplicationController
   private
 
   def params_hospital
-    params.require(:hospital).permit(:name)
+    params.require(:hospital).permit(:name, :admin_email, :address)
   end
 
   def set_hospital
