@@ -8,6 +8,19 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-1000.times do
-  Hospital.create!(name: "#{Faker::Address.city} Hospital", admin_email: "#{Faker::Internet.email}")
+# 1000.times do
+#   Hospital.create!(name: "#{Faker::Address.city} Hospital", admin_email: "#{Faker::Internet.email}")
+# end
+
+TOTAL_RECORDS = 3_000_000
+BATCH_SIZE = 300
+
+(1..TOTAL_RECORDS).each_slice(BATCH_SIZE) do |batch|
+  hospitals = batch.map do
+    Hospital.new(
+      name: Faker::Address.city,
+      admin_email: Faker::Internet.email
+    )
+  end
+  Hospital.import(hospitals)
 end
