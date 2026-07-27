@@ -17,10 +17,13 @@ BATCH_SIZE = 300
 
 (1..TOTAL_RECORDS).each_slice(BATCH_SIZE) do |batch|
   hospitals = batch.map do
-    Hospital.new(
+    {
       name: Faker::Address.city,
-      admin_email: Faker::Internet.email
-    )
+      admin_email: Faker::Internet.email,
+      created_at: Time.current(),
+      updated_at: Time.current()
+    }
   end
-  Hospital.import(hospitals)
+  Hospital.insert_all(hospitals)
+  puts "Inserted #{batch.last} hospitals"
 end
