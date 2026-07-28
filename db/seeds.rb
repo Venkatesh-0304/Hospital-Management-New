@@ -11,16 +11,29 @@
 # 1000.times do
 #   Hospital.create!(name: "#{Faker::Address.city} Hospital", admin_email: "#{Faker::Internet.email}")
 # end
+require "benchmark"
+TOTAL_RECORDS = 3000000
+BATCH_SIZE = 3000
 
-TOTAL_RECORDS = 3_000_000
-BATCH_SIZE = 300
+  time = Benchmark.realtime do
+    (TOTAL_RECORDS / BATCH_SIZE).times do |i|
+      hospitals = []
 
-(1..TOTAL_RECORDS).each_slice(BATCH_SIZE) do |batch|
-  hospitals = batch.map do
-    Hospital.new(
-      name: Faker::Address.city,
-      admin_email: Faker::Internet.email
-    )
+      BATCH_SIZE.times do
+        hospitals << Hospital.new(
+          name: "#{Faker::Address.city} Hospital",
+          address: Faker::Address.full_address,
+          admin_email: Faker::Internet.unique.email
+        )
+      end
+
+      batch_time = Benchmark.realtime do
+        Hospital.import(hospitals)
+      end
+
+      puts "Batch #{i + 1}: #{BATCH_SIZE} records imported in #{batch_time.round(2)} seconds"
+    end
   end
-  Hospital.import(hospitals)
-end
+
+puts "Finished creating #{TOTAL_RECORDS} hospitals"
+puts "Time taken: #{time.round(2)} seconds"
