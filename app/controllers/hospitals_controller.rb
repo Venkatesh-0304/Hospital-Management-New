@@ -1,10 +1,9 @@
 class HospitalsController < ApplicationController
   before_action :set_hospital, only: %i[show edit destroy update doctors]
   def index
+    @hospitals = Hospital.page(params[:page]).per(20)
     if params[:query].present?
       @hospitals = Hospital.where("name ILIKE ?", "%#{params[:query]}%").page(params[:page]).per(20)
-    else
-      @hospitals = Hospital.page(params[:page]).per(20)
     end
   end
 
