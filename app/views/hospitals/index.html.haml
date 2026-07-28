@@ -1,6 +1,10 @@
 = turbo_frame_tag "tab" do
   %div{style: "display:flex; justify-content:center;"}
     %div
+      = form_with url: "/hospitals", method: :get do |form|
+        = form.label :query, "Search for"
+        = form.search_field :query
+        = form.submit "Search"
       %h1{style:"color:navy;"} Hospitals
       = render "notification"
       = turbo_frame_tag "modal"
